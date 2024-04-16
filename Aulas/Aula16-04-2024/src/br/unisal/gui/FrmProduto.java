@@ -88,6 +88,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		
 		add(pnCampos, BorderLayout.CENTER);
 		
+		setVisible(true);
 	}
 	
 	@Override
