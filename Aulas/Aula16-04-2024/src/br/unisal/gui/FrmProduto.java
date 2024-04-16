@@ -1,5 +1,6 @@
 package br.unisal.gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class FrmProduto extends JFrame implements ActionListener {
-	//Declaração dos componentes da interface
+	//Passo 1: Declaração dos componentes da interface
 	//Labels
 	JLabel lbCodigo, lbDescricao, lbUnidadeMedida, lbLargura, lbComprimento,
 		   lbSituacao, lbLocalizacao;
@@ -28,6 +29,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	//Botões
 	JButton btnInclui, btnExclui, btnAltera, btnPesquisa;
+	
+	public FrmProduto() {
+		super("Cadastro de Produto");
+		setSize(300, 200);
+		setLayout(new BorderLayout());
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
