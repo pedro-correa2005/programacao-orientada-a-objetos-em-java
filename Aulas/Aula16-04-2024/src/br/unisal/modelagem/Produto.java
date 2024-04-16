@@ -1,7 +1,7 @@
 package br.unisal.modelagem;
 
 /**
- * Classe de Modelagem Conceitual de Prodouto
+ * Classe de Modelagem Conceitual de Produto
  * @author Pedro H. L. Corrêa
  * @date 16/04/2024
  */
