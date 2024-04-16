@@ -54,11 +54,16 @@ public class FrmProduto extends JFrame implements ActionListener {
 		txtLargura = new JTextField();
 		txtComprimento = new JTextField();
 		txtLocalizacao = new JTextField();
-		
 
 		//ComboBox
 		cbxSituacao = new JComboBox<Situacao>(Situacao.values());
 		cbxUnidadeMedida = new JComboBox<String>(UnidadeMedida.getUnidades());
+		
+		//Botões
+		btnInclui = new JButton("Incluir");
+		btnAltera = new JButton("Alterar");
+		btnExclui = new JButton("Excluir");
+		btnPesquisa = new JButton("Pesquisar");
 	}
 	
 	@Override
