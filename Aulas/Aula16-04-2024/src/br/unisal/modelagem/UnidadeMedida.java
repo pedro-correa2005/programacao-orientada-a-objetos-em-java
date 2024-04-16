@@ -27,4 +27,30 @@ public enum UnidadeMedida {
 		}
 		return null;
 	}
+	
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public String[] getUnidades() {
+		String unidades[] = new String[UnidadeMedida.values().length];
+		int cont = 0;
+		for(UnidadeMedida un: UnidadeMedida.values()) {
+			unidades[cont++] = un.getUnidade()  + " - " + un.getDescricao();
+		}
+		return unidades;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 }
