@@ -32,7 +32,7 @@ public enum UnidadeMedida {
 		return unidade;
 	}
 
-	public String[] getUnidades() {
+	public static String[] getUnidades() {
 		String unidades[] = new String[UnidadeMedida.values().length];
 		int cont = 0;
 		for(UnidadeMedida un: UnidadeMedida.values()) {
