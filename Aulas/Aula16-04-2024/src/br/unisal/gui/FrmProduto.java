@@ -45,6 +45,13 @@ public class FrmProduto extends JFrame implements ActionListener {
 		lbSituacao = new JLabel("Situação");
 		lbLocalizacao = new JLabel("Localização");
 		
+		//Campos de texto
+		txtCodigo = new JTextField();
+		txtDescricao = new JTextField();
+		txtLargura = new JTextField();
+		txtComprimento = new JTextField();
+		txtLocalizacao = new JTextField();
+		
 	}
 	
 	@Override
