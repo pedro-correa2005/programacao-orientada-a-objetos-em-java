@@ -34,6 +34,17 @@ public class FrmProduto extends JFrame implements ActionListener {
 		super("Cadastro de Produto");
 		setSize(300, 200);
 		setLayout(new BorderLayout());
+		
+		//Passo 2 Construir os objetos
+		//Labels
+		lbCodigo = new JLabel("Código");
+		lbDescricao = new JLabel("Descrição");
+		lbUnidadeMedida = new JLabel("Un. Medida");
+		lbLargura = new JLabel("Largura");
+		lbComprimento = new JLabel("Comprimento");
+		lbSituacao = new JLabel("Situação");
+		lbLocalizacao = new JLabel("Localização");
+		
 	}
 	
 	@Override
