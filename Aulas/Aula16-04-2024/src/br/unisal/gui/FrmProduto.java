@@ -3,6 +3,7 @@ package br.unisal.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,6 +17,9 @@ public class FrmProduto extends JFrame implements ActionListener {
 	//Campos de texto
 	JTextField txtCodigo, txtDescricao, txtLargura, txtComprimento, 
 			   txtLocalizacao;
+	
+	//ComboBox
+	JComboBox cbxUnidadeMedida, cbxSituacao;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
