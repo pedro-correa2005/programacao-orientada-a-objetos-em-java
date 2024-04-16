@@ -5,12 +5,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class FrmProduto extends JFrame implements ActionListener {
 	//Declaração dos componentes da interface
-	JLabel lbCodigo, lbDescricao, lbUnidadeMedida, lbLargula, lbComprimento,
-	lbSituacao, lbLocalizacao;
+	//Labels
+	JLabel lbCodigo, lbDescricao, lbUnidadeMedida, lbLargura, lbComprimento,
+		   lbSituacao, lbLocalizacao;
 	
+	//Campos de texto
+	JTextField txtCodigo, txtDescricao, txtLargura, txtComprimento, 
+			   txtLocalizacao;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
