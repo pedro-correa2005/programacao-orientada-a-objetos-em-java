@@ -70,6 +70,24 @@ public class FrmProduto extends JFrame implements ActionListener {
 		pnCampos = new JPanel(new GridLayout(7,2));
 		pnBotoes = new JPanel(new GridLayout(1,4));
 		
+		//Passo 3: Adicionar os campos à tela
+		pnCampos.add(lbCodigo);
+		pnCampos.add(txtCodigo);
+		pnCampos.add(lbDescricao);
+		pnCampos.add(txtDescricao);
+		pnCampos.add(lbUnidadeMedida);
+		pnCampos.add(cbxUnidadeMedida);
+		pnCampos.add(lbLargura);
+		pnCampos.add(txtLargura);
+		pnCampos.add(lbComprimento);
+		pnCampos.add(txtComprimento);
+		pnCampos.add(lbSituacao);
+		pnCampos.add(cbxSituacao);
+		pnCampos.add(lbLocalizacao);
+		pnCampos.add(txtLocalizacao);
+		
+		add(pnCampos, BorderLayout.CENTER);
+		
 	}
 	
 	@Override
