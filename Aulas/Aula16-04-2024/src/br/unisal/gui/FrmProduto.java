@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.unisal.modelagem.Situacao;
+import br.unisal.modelagem.UnidadeMedida;
+
 public class FrmProduto extends JFrame implements ActionListener {
 	//Passo 1: Declaração dos componentes da interface
 	//Labels
@@ -52,6 +55,10 @@ public class FrmProduto extends JFrame implements ActionListener {
 		txtComprimento = new JTextField();
 		txtLocalizacao = new JTextField();
 		
+
+		//ComboBox
+		cbxSituacao = new JComboBox<Situacao>(Situacao.values());
+		cbxUnidadeMedida = new JComboBox<String>(UnidadeMedida.getUnidades());
 	}
 	
 	@Override
