@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class FrmProduto extends JFrame implements ActionListener {
@@ -20,6 +21,11 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	//ComboBox
 	JComboBox cbxUnidadeMedida, cbxSituacao;
+	
+	//Painéis
+	JPanel pnCampos, pnBotoes;
+	
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
