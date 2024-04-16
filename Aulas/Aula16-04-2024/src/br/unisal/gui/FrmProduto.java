@@ -1,6 +1,7 @@
 package br.unisal.gui;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -64,6 +65,11 @@ public class FrmProduto extends JFrame implements ActionListener {
 		btnAltera = new JButton("Alterar");
 		btnExclui = new JButton("Excluir");
 		btnPesquisa = new JButton("Pesquisar");
+		
+		//Painéis
+		pnCampos = new JPanel(new GridLayout(7,2));
+		pnBotoes = new JPanel(new GridLayout(1,4));
+		
 	}
 	
 	@Override
