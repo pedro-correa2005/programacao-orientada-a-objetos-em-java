@@ -11,11 +11,20 @@ public enum UnidadeMedida {
 	RL("RL", "Rolo");
 	
 	private String unidade;
-	private String descrição;
+	private String descricao;
 	
 	
-	private UnidadeMedida(String unidade, String descrição) {
+	private UnidadeMedida(String unidade, String descricao) {
 		this.unidade = unidade;
-		this.descrição = descrição;
+		this.descricao = descricao;
+	}
+	
+	public String getValue(String UN) {
+		for(UnidadeMedida un: UnidadeMedida.values()) {
+			if(un.unidade.equals(UN)) {
+				return un.descricao;
+			}
+		}
+		return null;
 	}
 }
