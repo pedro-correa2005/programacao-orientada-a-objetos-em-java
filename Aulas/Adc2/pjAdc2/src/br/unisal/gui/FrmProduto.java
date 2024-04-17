@@ -275,6 +275,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 		txtLocalizacao.setText("");
 		cbxSituacao.setSelectedIndex(0);
 		cbxUnidadeMedida.setSelectedIndex(0);
+		
+		txtCodigo.requestFocus();
 	}
 	
 	private Produto instanciar() {
