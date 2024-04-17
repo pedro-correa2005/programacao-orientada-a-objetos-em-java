@@ -113,13 +113,20 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Produto produto;
 		if(e.getSource() == btnInclui) {
-			bdProduto.add(instanciar());
+			produto = instanciar();
+			if(produto != null) {
+				bdProduto.add(produto);
+			}
 		}
 		if(e.getSource() == btnAltera) {
 			for(Produto p: bdProduto) {
 				if(p.getCodigo() == p.getCodigo()) {
-					p = instanciar();
+					produto = instanciar();
+					if(produto != null) {
+						p = instanciar();
+					}
 				}
 			}
 		}
@@ -132,6 +139,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 			p.setCodigo(Integer.parseInt(txtCodigo.getText()));
 		}catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Código do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			return null;
 		}
 		
 		p.setDescricao(txtDescricao.getText());
@@ -141,12 +149,14 @@ public class FrmProduto extends JFrame implements ActionListener {
 			p.setLargura(Float.parseFloat(txtLargura.getText()));
 		}catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Largura do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			return null;
 		}
 		
 		try {
 			p.setComprimento(Float.parseFloat(txtComprimento.getText()));
 		}catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Comprimento do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			return null;
 		}
 		
 		p.setSituacao(Situacao.values()[cbxSituacao.getSelectedIndex()]);
