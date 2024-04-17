@@ -155,7 +155,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 		int indice = 0;
 		for(Produto p: bdProduto) {
 			//Caso o produto seja encontrado, coloca todas as informações
-			//nos campos
+			//nos campos habilita os botões de alterar e excluir e sai do 
+			//método
 			if(p.getCodigo() == cod) {
 				txtDescricao.setText(p.getDescricao());
 				
@@ -168,17 +169,14 @@ public class FrmProduto extends JFrame implements ActionListener {
 				cbxSituacao.setSelectedItem(p.getSituacao());
 				
 				txtLocalizacao.setText(p.getLocalizacao());
-				break;
+				
+				btnAltera.setEnabled(true);
+				btnAltera.setEnabled(true);
+				return;
 			}
 			indice++;
 		}
-		
-		//Caso não encontre o produto, o laço de repetição irá percorrer
-		//toda a lista, portanto o valor de índice será o tamanho da lista
-		if(indice == bdProduto.size()) {
-			JOptionPane.showMessageDialog(null, "Produto não encontrado.","Pesquisa", JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
+		//Caso não encontre o produto o método chegará ao fim
 	}
 	
 	private void limpar() {
