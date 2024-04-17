@@ -123,6 +123,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 				}
 			}
 		}
+		System.out.println(bdProduto);
 	}
 	
 	private Produto instanciar() {
