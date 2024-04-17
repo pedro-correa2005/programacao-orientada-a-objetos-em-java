@@ -118,6 +118,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 			produto = instanciar();
 			if(produto != null) {
 				bdProduto.add(produto);
+				limpar();
 			}
 		}
 		if(e.getSource() == btnAltera) {
@@ -126,11 +127,22 @@ public class FrmProduto extends JFrame implements ActionListener {
 					produto = instanciar();
 					if(produto != null) {
 						p = instanciar();
+						limpar();
 					}
 				}
 			}
 		}
 		System.out.println(bdProduto);
+	}
+	
+	private void limpar() {
+		txtCodigo.setText("");
+		txtDescricao.setText("");
+		txtComprimento.setText("");
+		txtLargura.setText("");
+		txtLocalizacao.setText("");
+		cbxSituacao.setSelectedIndex(0);
+		cbxUnidadeMedida.setSelectedIndex(0);
 	}
 	
 	private Produto instanciar() {
