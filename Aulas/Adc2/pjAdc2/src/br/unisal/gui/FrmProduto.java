@@ -116,13 +116,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Produto produto;
 		if(e.getSource() == btnInclui) {
-			produto = instanciar();
-			if(produto != null) {
-				bdProduto.add(produto);
-				limpar();
-			}
+			incluir();
 		}
 		if(e.getSource() == btnAltera) {
 			alterar();
@@ -130,7 +125,18 @@ public class FrmProduto extends JFrame implements ActionListener {
 		if(e.getSource() == btnPesquisa) {
 			pesquisar();
 		}
+		if(e.getSource() == btnExclui) {
+			excluir();
+		}
 		System.out.println(bdProduto);
+	}
+	
+	private void incluir() {
+		Produto produto = instanciar();
+		if(produto != null) {
+			bdProduto.add(produto);
+			limpar();
+		}
 	}
 	
 	private void alterar() {
@@ -153,9 +159,9 @@ public class FrmProduto extends JFrame implements ActionListener {
 					p.setLocalizacao(produtoAlterado.getLocalizacao());
 					limpar();
 					//Botoes de alterar e excluir são desabilitados
-					JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 					btnAltera.setEnabled(false);
 					btnExclui.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else {
 					//Caso a instanciação seja mal-sucedida, interrompe o método
@@ -164,9 +170,33 @@ public class FrmProduto extends JFrame implements ActionListener {
 			}
 		}
 		//Caso não encontre o produto
-		JOptionPane.showMessageDialog(null, "Não foi possível alterar o produto\nVerifique o código do produto e tente novamente", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 		btnAltera.setEnabled(false);
 		btnExclui.setEnabled(false);
+		JOptionPane.showMessageDialog(null, "Não foi possível alterar o produto\nVerifique o código do produto e tente novamente", "Alteração", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void excluir() {
+		//Percorre a lista de produtos
+		for(Produto p: bdProduto) {
+			//Encontra produto com o mesmo código que o código inserido
+			if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
+				//Caso o produto já tenha sido excluído encerra o método
+				if(p.getSituacao() == Situacao.EXCLUIDO) {
+					JOptionPane.showMessageDialog(null, "Produto já excluído.", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				//Caso contrário exclui o produto
+				p.setSituacao(Situacao.EXCLUIDO);
+				btnAltera.setEnabled(false);
+				btnExclui.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "Produto excluído com sucesso", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+		}
+		//Caso não encontre o produto
+		btnAltera.setEnabled(false);
+		btnExclui.setEnabled(false);
+		JOptionPane.showMessageDialog(null, "Não foi possível encontrar o produto\nVerifique o código do produto e tente novamente", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void pesquisar() {
