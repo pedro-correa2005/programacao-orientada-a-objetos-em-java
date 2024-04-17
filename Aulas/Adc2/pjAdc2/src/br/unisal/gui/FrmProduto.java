@@ -154,7 +154,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		}
 		
 		int cod;
-		//Lê o código inserido e guarda na variável cod
+		//Lê o código inserido e o guarda na variável cod
 		try {
 			cod = Integer.parseInt(txtCodigo.getText());
 		}catch(NumberFormatException e) {
