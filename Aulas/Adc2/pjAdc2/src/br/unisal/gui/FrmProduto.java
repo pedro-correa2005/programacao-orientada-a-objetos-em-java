@@ -135,7 +135,50 @@ public class FrmProduto extends JFrame implements ActionListener {
 				}
 			}
 		}
+		if(e.getSource() == btnPesquisa) {
+			pesquisar();
+		}
 		System.out.println(bdProduto);
+	}
+	
+	private void pesquisar() {
+		int cod;
+		//Lê o código inserido e guarda na variável cod
+		try {
+			cod = Integer.parseInt(txtCodigo.getText());
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Código do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		//Encontra o índice em que o produto com o mesmo código se encontra
+		int indice = 0;
+		for(Produto p: bdProduto) {
+			//Caso o produto seja encontrado, coloca todas as informações
+			//nos campos
+			if(p.getCodigo() == cod) {
+				txtDescricao.setText(p.getDescricao());
+				
+				cbxUnidadeMedida.setSelectedItem(p.getUn().getUnidade()+ " - " + p.getUn().getDescricao());
+				
+				txtLargura.setText(Float.toString(p.getLargura()));
+				
+				txtComprimento.setText(Float.toString(p.getComprimento()));
+				
+				cbxSituacao.setSelectedItem(p.getSituacao());
+				
+				txtLocalizacao.setText(p.getLocalizacao());
+				break;
+			}
+			indice++;
+		}
+		
+		//Caso não encontre o produto, o laço de repetição irá percorrer
+		//toda a lista, portanto o valor de índice será o tamanho da lista
+		if(indice == bdProduto.size()) {
+			JOptionPane.showMessageDialog(null, "Produto não encontrado.","Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 	}
 	
 	private void limpar() {
@@ -153,7 +196,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		try {
 			p.setCodigo(Integer.parseInt(txtCodigo.getText()));
 		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Código do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Código do Produto Inválido", "Validação", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 		
@@ -170,7 +213,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		try {
 			p.setComprimento(Float.parseFloat(txtComprimento.getText()));
 		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Comprimento do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Comprimento do Produto Inválido", "Validação", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 		
