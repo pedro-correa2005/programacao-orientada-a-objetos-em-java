@@ -125,25 +125,48 @@ public class FrmProduto extends JFrame implements ActionListener {
 			}
 		}
 		if(e.getSource() == btnAltera) {
-			int indice = 0;
-			for(Produto p: bdProduto) {
-				if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
-					produto = instanciar();
-					if(produto != null) {
-						
-						limpar();
-						btnAltera.setEnabled(false);
-						btnExclui.setEnabled(false);
-						return;
-					}
-				}
-				indice++;
-			}
+			alterar();
 		}
 		if(e.getSource() == btnPesquisa) {
 			pesquisar();
 		}
 		System.out.println(bdProduto);
+	}
+	
+	private void alterar() {
+		//Declara novo produto que possirá os atributos a serem modificados
+		Produto produtoAlterado;
+		//Percorre a lista de produtos
+		for(Produto p: bdProduto) {
+			//Encontra produto com o mesmo código que o código inserido
+			if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
+				//Instancia novo produto
+				produtoAlterado = instanciar();
+				//Caso a instanciação seja bem-sucedida
+				if(produtoAlterado != null) {
+					//O produto na lista recebe os atributos do "novo" produto
+					p.setDescricao(produtoAlterado.getDescricao());
+					p.setUn(produtoAlterado.getUn());
+					p.setLargura(produtoAlterado.getLargura());
+					p.setComprimento(produtoAlterado.getComprimento());
+					p.setSituacao(produtoAlterado.getSituacao());
+					p.setLocalizacao(produtoAlterado.getLocalizacao());
+					limpar();
+					//Botoes de alterar e excluir são desabilitados
+					JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Alteração", JOptionPane.INFORMATION_MESSAGE);
+					btnAltera.setEnabled(false);
+					btnExclui.setEnabled(false);
+					return;
+				}else {
+					//Caso a instanciação seja mal-sucedida, interrompe o método
+					return;
+				}
+			}
+		}
+		//Caso não encontre o produto
+		JOptionPane.showMessageDialog(null, "Não foi possível alterar o produto\nVerifique o código do produto e tente novamente", "Alteração", JOptionPane.INFORMATION_MESSAGE);
+		btnAltera.setEnabled(false);
+		btnExclui.setEnabled(false);
 	}
 	
 	private void pesquisar() {
