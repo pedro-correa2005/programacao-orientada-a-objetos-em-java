@@ -151,8 +151,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 			return;
 		}
 		
-		//Encontra o índice em que o produto com o mesmo código se encontra
-		int indice = 0;
+		//Percorre a lista buscando por um produto com o mesmo código que o
+		//código inserido
 		for(Produto p: bdProduto) {
 			//Caso o produto seja encontrado, coloca todas as informações
 			//nos campos habilita os botões de alterar e excluir e sai do 
@@ -174,7 +174,6 @@ public class FrmProduto extends JFrame implements ActionListener {
 				btnAltera.setEnabled(true);
 				return;
 			}
-			indice++;
 		}
 		//Caso não encontre o produto o método chegará ao fim
 	}
