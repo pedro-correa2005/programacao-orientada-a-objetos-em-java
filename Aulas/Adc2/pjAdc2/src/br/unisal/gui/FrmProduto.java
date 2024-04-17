@@ -125,14 +125,19 @@ public class FrmProduto extends JFrame implements ActionListener {
 			}
 		}
 		if(e.getSource() == btnAltera) {
+			int indice = 0;
 			for(Produto p: bdProduto) {
-				if(p.getCodigo() == p.getCodigo()) {
+				if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
 					produto = instanciar();
 					if(produto != null) {
-						p = instanciar();
+						
 						limpar();
+						btnAltera.setEnabled(false);
+						btnExclui.setEnabled(false);
+						return;
 					}
 				}
+				indice++;
 			}
 		}
 		if(e.getSource() == btnPesquisa) {
@@ -142,6 +147,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 	}
 	
 	private void pesquisar() {
+		//Se a lista está vazia
+		if(bdProduto.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Nenhum produto cadastrado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		int cod;
 		//Lê o código inserido e guarda na variável cod
 		try {
@@ -171,11 +182,14 @@ public class FrmProduto extends JFrame implements ActionListener {
 				txtLocalizacao.setText(p.getLocalizacao());
 				
 				btnAltera.setEnabled(true);
-				btnAltera.setEnabled(true);
+				btnExclui.setEnabled(true);
+				
+				JOptionPane.showMessageDialog(null, "Produto encontrado com sucesso", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 		}
 		//Caso não encontre o produto o método chegará ao fim
+		JOptionPane.showMessageDialog(null, "Produto não encontrado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void limpar() {
