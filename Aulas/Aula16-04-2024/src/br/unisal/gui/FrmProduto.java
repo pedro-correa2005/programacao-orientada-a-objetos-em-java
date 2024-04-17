@@ -113,8 +113,16 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource() == btnInclui) {
+			bdProduto.add(instanciar());
+		}
+		if(e.getSource() == btnAltera) {
+			for(Produto p: bdProduto) {
+				if(p.getCodigo() == p.getCodigo()) {
+					p = instanciar();
+				}
+			}
+		}
 	}
 	
 	private Produto instanciar() {
