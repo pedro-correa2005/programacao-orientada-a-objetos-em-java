@@ -39,7 +39,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 	JPanel pnCampos, pnBotoes;
 	
 	//Botões
-	JButton btnInclui, btnExclui, btnAltera, btnPesquisa;
+	JButton btnInclui, btnExclui, btnAltera, btnPesquisa, btnLimpa;
 	
 	public FrmProduto() {
 		super("Cadastro de Produto");
@@ -72,13 +72,14 @@ public class FrmProduto extends JFrame implements ActionListener {
 		btnAltera = new JButton("Alterar");
 		btnExclui = new JButton("Excluir");
 		btnPesquisa = new JButton("Pesquisar");
+		btnLimpa = new JButton("Limpar");
 		
 		btnAltera.setEnabled(false);
 		btnExclui.setEnabled(false);
 		
 		//Painéis
 		pnCampos = new JPanel(new GridLayout(7,2));
-		pnBotoes = new JPanel(new GridLayout(1,4));
+		pnBotoes = new JPanel(new GridLayout(1,5));
 		
 		//Passo 3: Adicionar os campos à tela
 		pnCampos.add(lbCodigo);
@@ -102,6 +103,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		pnBotoes.add(btnAltera);
 		pnBotoes.add(btnExclui);
 		pnBotoes.add(btnPesquisa);
+		pnBotoes.add(btnLimpa);
 		
 		add(pnBotoes, BorderLayout.SOUTH);
 		
@@ -110,6 +112,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		btnAltera.addActionListener(this);
 		btnExclui.addActionListener(this);
 		btnPesquisa.addActionListener(this);
+		btnLimpa.addActionListener(this);
 		
 		setVisible(true);
 	}
@@ -128,12 +131,18 @@ public class FrmProduto extends JFrame implements ActionListener {
 		if(e.getSource() == btnExclui) {
 			excluir();
 		}
-		System.out.println(bdProduto);
+		if(e.getSource() == btnLimpa) {
+			limpar();
+		}
 	}
 	
 	private void incluir() {
+		//Instancia novo produto
 		Produto produto = instanciar();
+		//Caso a instanciação seja bem-sucedida
 		if(produto != null) {
+			//Adiciona o produto à lista e volta formulário para o estado
+			//original
 			bdProduto.add(produto);
 			limpar();
 		}
@@ -142,7 +151,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 	private void alterar() {
 		//Declara novo produto que possirá os atributos a serem modificados
 		Produto produtoAlterado;
-		//Guarda o código inserido
+		//Guarda o código inserido na pesquisa
 		int cod = Integer.parseInt(txtCodigo.getText());
 		//Percorre a lista de produtos
 		for(Produto p: bdProduto) {
@@ -161,10 +170,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 					p.setLocalizacao(produtoAlterado.getLocalizacao());
 					//O formulário volta para o estado original
 					limpar();
-					btnInclui.setEnabled(true);
-					txtCodigo.setEnabled(true);
-					btnExclui.setEnabled(false);
-					btnAltera.setEnabled(false);
+					
 					JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else {
@@ -173,9 +179,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 				}
 			}
 		}
-		//Caso não encontre o produto
-		btnAltera.setEnabled(false);
-		btnExclui.setEnabled(false);
+		//Caso não encontre o produto o formulário volta para o estado original
+		limpar();
 		JOptionPane.showMessageDialog(null, "Não foi possível alterar o produto\nVerifique o código do produto e tente novamente", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -186,16 +191,10 @@ public class FrmProduto extends JFrame implements ActionListener {
 			if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
 				//Exclui o produto
 				p.setSituacao(Situacao.EXCLUIDO);
-				btnAltera.setEnabled(false);
-				btnExclui.setEnabled(false);
-				JOptionPane.showMessageDialog(null, "Produto excluído com sucesso", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 				
-				//Formulário volta para o estado original e sai do método
+				//Volta o formulário para o estado original
 				limpar();
-				btnInclui.setEnabled(true);
-				txtCodigo.setEnabled(true);
-				btnExclui.setEnabled(false);
-				btnAltera.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "Produto excluído com sucesso", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 		}
@@ -206,10 +205,6 @@ public class FrmProduto extends JFrame implements ActionListener {
 		//original e encerra o método
 		if(!(txtCodigo.isEnabled())) {
 			limpar();
-			btnInclui.setEnabled(true);
-			txtCodigo.setEnabled(true);
-			btnExclui.setEnabled(false);
-			btnAltera.setEnabled(false);
 			return;
 		}
 		
@@ -224,7 +219,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 		try {
 			cod = Integer.parseInt(txtCodigo.getText());
 		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Código do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Código do Produto Inválido", "Validação", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -267,6 +262,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 	}
 	
 	private void limpar() {
+		//O formulário volta para o estado original
+		btnInclui.setEnabled(true);
+		txtCodigo.setEnabled(true);
+		btnExclui.setEnabled(false);
+		btnAltera.setEnabled(false);
+		
 		txtCodigo.setText("");
 		txtDescricao.setText("");
 		txtComprimento.setText("");
