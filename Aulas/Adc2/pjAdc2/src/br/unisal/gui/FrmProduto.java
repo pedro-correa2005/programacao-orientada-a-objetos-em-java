@@ -73,6 +73,9 @@ public class FrmProduto extends JFrame implements ActionListener {
 		btnExclui = new JButton("Excluir");
 		btnPesquisa = new JButton("Pesquisar");
 		
+		btnAltera.setEnabled(false);
+		btnExclui.setEnabled(false);
+		
 		//Painéis
 		pnCampos = new JPanel(new GridLayout(7,2));
 		pnBotoes = new JPanel(new GridLayout(1,4));
