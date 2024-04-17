@@ -43,7 +43,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 	
 	public FrmProduto() {
 		super("Cadastro de Produto");
-		setSize(400, 200);
+		setSize(500, 200);
 		setLayout(new BorderLayout());
 		
 		//Passo 2 Construir os objetos
