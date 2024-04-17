@@ -88,6 +88,13 @@ public class FrmProduto extends JFrame implements ActionListener {
 		
 		add(pnCampos, BorderLayout.CENTER);
 		
+		pnBotoes.add(btnInclui);
+		pnBotoes.add(btnAltera);
+		pnBotoes.add(btnExclui);
+		pnBotoes.add(btnPesquisa);
+		
+		add(pnBotoes, BorderLayout.SOUTH);
+		
 		setVisible(true);
 	}
 	
@@ -98,8 +105,7 @@ public class FrmProduto extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		new FrmProduto().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
