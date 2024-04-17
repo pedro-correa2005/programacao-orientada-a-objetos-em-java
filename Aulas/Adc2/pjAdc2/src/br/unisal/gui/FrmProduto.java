@@ -142,20 +142,11 @@ public class FrmProduto extends JFrame implements ActionListener {
 	private void alterar() {
 		//Declara novo produto que possirá os atributos a serem modificados
 		Produto produtoAlterado;
+		//Guarda o código inserido
+		int cod = Integer.parseInt(txtCodigo.getText());
 		//Percorre a lista de produtos
 		for(Produto p: bdProduto) {
 			//Encontra produto com o mesmo código que o código inserido
-			int cod;
-			
-			try{
-				cod = Integer.parseInt(txtCodigo.getText());
-			}catch(NumberFormatException e) {
-				btnAltera.setEnabled(false);
-				btnExclui.setEnabled(false);
-				JOptionPane.showMessageDialog(null, "Código do Produto Inválido", "Validação", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			
 			if(p.getCodigo() == cod) {
 				//Instancia novo produto
 				produtoAlterado = instanciar();
@@ -168,10 +159,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 					p.setComprimento(produtoAlterado.getComprimento());
 					p.setSituacao(produtoAlterado.getSituacao());
 					p.setLocalizacao(produtoAlterado.getLocalizacao());
+					//O formulário volta para o estado original
 					limpar();
-					//Botoes de alterar e excluir são desabilitados
-					btnAltera.setEnabled(false);
+					btnInclui.setEnabled(true);
+					txtCodigo.setEnabled(true);
 					btnExclui.setEnabled(false);
+					btnAltera.setEnabled(false);
 					JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Alteração", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else {
@@ -191,27 +184,36 @@ public class FrmProduto extends JFrame implements ActionListener {
 		for(Produto p: bdProduto) {
 			//Encontra produto com o mesmo código que o código inserido
 			if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
-				//Caso o produto já tenha sido excluído encerra o método
-				if(p.getSituacao() == Situacao.EXCLUIDO) {
-					JOptionPane.showMessageDialog(null, "Produto já excluído.", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
-					return;
-				}
-				//Caso contrário exclui o produto
+				//Exclui o produto
 				p.setSituacao(Situacao.EXCLUIDO);
 				btnAltera.setEnabled(false);
 				btnExclui.setEnabled(false);
 				JOptionPane.showMessageDialog(null, "Produto excluído com sucesso", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+				
+				//Formulário volta para o estado original e sai do método
+				limpar();
+				btnInclui.setEnabled(true);
+				txtCodigo.setEnabled(true);
+				btnExclui.setEnabled(false);
+				btnAltera.setEnabled(false);
 				return;
 			}
 		}
-		//Caso não encontre o produto
-		btnAltera.setEnabled(false);
-		btnExclui.setEnabled(false);
-		JOptionPane.showMessageDialog(null, "Não foi possível encontrar o produto\nVerifique o código do produto e tente novamente", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void pesquisar() {
-		//Se a lista está vazia
+		//Se há uma pesquisa carregada, volta o formulário para o estado
+		//original e encerra o método
+		if(!(txtCodigo.isEnabled())) {
+			limpar();
+			btnInclui.setEnabled(true);
+			txtCodigo.setEnabled(true);
+			btnExclui.setEnabled(false);
+			btnAltera.setEnabled(false);
+			return;
+		}
+		
+		//Se a lista está vazia encerra o método
 		if(bdProduto.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Nenhum produto cadastrado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 			return;
@@ -230,8 +232,8 @@ public class FrmProduto extends JFrame implements ActionListener {
 		//código inserido
 		for(Produto p: bdProduto) {
 			//Caso o produto seja encontrado, coloca todas as informações
-			//nos campos habilita os botões de alterar e excluir e sai do 
-			//método
+			//nos campos e habilita o botão de alterar desabilita o botão de
+			//incluir e o campo de código, por útimo, sai do método
 			if(p.getCodigo() == cod) {
 				txtDescricao.setText(p.getDescricao());
 				
@@ -246,7 +248,15 @@ public class FrmProduto extends JFrame implements ActionListener {
 				txtLocalizacao.setText(p.getLocalizacao());
 				
 				btnAltera.setEnabled(true);
-				btnExclui.setEnabled(true);
+				
+				//Caso o produto já esteja excluido o botão excluir 
+				//permanece desabilitado caso contrário é habilitado
+				if(p.getSituacao() != Situacao.EXCLUIDO) {
+					btnExclui.setEnabled(true);
+				}
+				
+				btnInclui.setEnabled(false);
+				txtCodigo.setEnabled(false);
 				
 				JOptionPane.showMessageDialog(null, "Produto localizado com sucesso", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 				return;
