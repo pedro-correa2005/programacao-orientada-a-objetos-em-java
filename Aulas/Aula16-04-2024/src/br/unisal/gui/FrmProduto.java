@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,6 +20,9 @@ import br.unisal.modelagem.Situacao;
 import br.unisal.modelagem.UnidadeMedida;
 
 public class FrmProduto extends JFrame implements ActionListener {
+	//Declaração da lista de produtos para o CRUD
+	List<Produto> bdProduto = new ArrayList<Produto>();
+	
 	//Passo 1: Declaração dos componentes da interface
 	//Labels
 	JLabel lbCodigo, lbDescricao, lbUnidadeMedida, lbLargura, lbComprimento,
