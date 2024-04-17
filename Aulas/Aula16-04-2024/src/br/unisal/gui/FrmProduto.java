@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.unisal.modelagem.Produto;
 import br.unisal.modelagem.Situacao;
 import br.unisal.modelagem.UnidadeMedida;
 
@@ -102,6 +104,34 @@ public class FrmProduto extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private Produto instanciar() {
+		Produto p = new Produto();
+		try {
+			p.setCodigo(Integer.parseInt(txtCodigo.getText()));
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Código do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		p.setDescricao(txtDescricao.getText());
+		p.setUn(UnidadeMedida.values()[cbxUnidadeMedida.getSelectedIndex()]);
+		
+		try {
+			p.setLargura(Float.parseFloat(txtLargura.getText()));
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Largura do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		try {
+			p.setComprimento(Float.parseFloat(txtComprimento.getText()));
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Comprimento do Produto Inválida", "Validação", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		p.setSituacao(Situacao.values()[cbxSituacao.getSelectedIndex()]);
+		p.setLocalizacao(txtLocalizacao.getText());
+		return p;
 	}
 
 	public static void main(String[] args) {
