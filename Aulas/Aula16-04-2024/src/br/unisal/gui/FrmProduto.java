@@ -102,6 +102,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 		
 		add(pnBotoes, BorderLayout.SOUTH);
 		
+		//Passo 4: Incluir os elementos no Listener de Ações
+		btnInclui.addActionListener(this);
+		btnAltera.addActionListener(this);
+		btnExclui.addActionListener(this);
+		btnPesquisa.addActionListener(this);
+		
 		setVisible(true);
 	}
 	
