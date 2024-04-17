@@ -145,7 +145,18 @@ public class FrmProduto extends JFrame implements ActionListener {
 		//Percorre a lista de produtos
 		for(Produto p: bdProduto) {
 			//Encontra produto com o mesmo código que o código inserido
-			if(p.getCodigo() == Integer.parseInt(txtCodigo.getText())) {
+			int cod;
+			
+			try{
+				cod = Integer.parseInt(txtCodigo.getText());
+			}catch(NumberFormatException e) {
+				btnAltera.setEnabled(false);
+				btnExclui.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "Código do Produto Inválido", "Validação", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if(p.getCodigo() == cod) {
 				//Instancia novo produto
 				produtoAlterado = instanciar();
 				//Caso a instanciação seja bem-sucedida
@@ -237,12 +248,12 @@ public class FrmProduto extends JFrame implements ActionListener {
 				btnAltera.setEnabled(true);
 				btnExclui.setEnabled(true);
 				
-				JOptionPane.showMessageDialog(null, "Produto encontrado com sucesso", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Produto localizado com sucesso", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 		}
 		//Caso não encontre o produto o método chegará ao fim
-		JOptionPane.showMessageDialog(null, "Produto não encontrado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Produto não localizado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void limpar() {
