@@ -1,7 +1,9 @@
 package pjAula11;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -29,6 +31,7 @@ public class EscreveArquivo {
 				+ "Could I find you? There?\n"
 				+ "Could I find you? There?\n"
 				+ "If I slipped away?\n";
+		
 		String nome_arq = "memoria.txt";
 		File tstArquivo = new File(nome_arq);
 		
@@ -47,8 +50,23 @@ public class EscreveArquivo {
 			buffer.write(texto);
 			buffer.close();
 		}catch(IOException e) {
-			System.out.println("Erro ao abrir o arquivo");
+			System.err.println("Erro ao abrir o arquivo");
 		}
+		
+		//Estrutura parpa Leitura
+		try {
+			FileReader arquivoLeitura = new FileReader(nome_arq);
+			BufferedReader buffer = new BufferedReader(arquivoLeitura);
+			String saida = buffer.readLine();
+			while(saida != null) {
+				System.out.println(saida);
+				saida = buffer.readLine();
+			}
+			buffer.close();
+		}catch(IOException e) {
+			System.err.println("Erro ao ler arquivo");
+		}
+		
 	}
 
 }
