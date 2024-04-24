@@ -7,9 +7,11 @@ public class ListaDiretorios {
 		File diretorio = new File("C:\\");
 		if(diretorio.isDirectory()) {
 			String [] arquivos = diretorio.list();
+			
 			for (int i = 0; i < arquivos.length; i++) {
 				File f = new File(arquivos[i]);
 				System.out.println((f.isDirectory()?"Diretorio ":"Arquivo ") + arquivos[i]);
+				
 			}
 		}
 	}
