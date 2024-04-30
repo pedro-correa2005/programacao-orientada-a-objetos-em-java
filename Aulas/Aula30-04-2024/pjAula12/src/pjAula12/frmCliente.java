@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,12 +34,28 @@ public class frmCliente extends JFrame implements ActionListener {
 		setTitle("Cadastro de Clientes");
 		setLayout(layout = new BorderLayout());
 		setSize(400, 300);
-		setLocation(50, 50);//Posição em que exibe
+		setLocation(500, 200);//Posição em que exibe
 		
+		
+		//Passo 2: Instanciação dos Objetos
 		pnCampos = new JPanel();
 		pnBotoes = new JPanel();
 		gridCampos = new GridLayout(4,2);
 		gridBotoes = new GridLayout(1,4);
+		
+		lbNome = new JLabel("Razão Social ");
+		lbCNPJ = new JLabel("CNPJ ");
+		lbTelefone = new JLabel("Telefone ");
+		lbStatus = new JLabel("Status ");
+		
+		txtNome = new JTextField(20);
+		
+		try {
+			mascaraCNPJ = new MaskFormatter("##.###.###/####-##");
+			mascaraTelefone = new MaskFormatter("(##)####-#####");
+		} catch (ParseException e) {
+			System.err.println("Falha na Máscara.");
+		}
 		
 		setVisible(true);
 	}
