@@ -57,6 +57,14 @@ public class frmCliente extends JFrame implements ActionListener {
 			System.err.println("Falha na Máscara.");
 		}
 		
+		txtCNPJ = new JFormattedTextField(mascaraCNPJ);
+		txtTelefone = new JFormattedTextField(mascaraTelefone);
+		
+		cbxStatus = new JComboBox<String>(status);
+		
+		btCadastrar = new JButton("Cadastrar");
+		btCadastrar.setMnemonic('C');
+		
 		setVisible(true);
 	}
 	
