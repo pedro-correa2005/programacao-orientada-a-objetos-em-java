@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -108,8 +110,25 @@ public class frmCliente extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource() == btCadastrar) {
+			try {
+				//Se o arquivo não existir, cria.
+				if(!arquivo.exists()) {
+					OutputStream f0 = new FileOutputStream("Clientes.txt");
+				}
+			}catch(Exception exe) {
+				
+			}
+		}
+		if(e.getSource() == btConsultar) {
+			
+		}
+		if(e.getSource() == btLimpar) {
+			
+		}
+		if(e.getSource() == btSair) {
+			
+		}
 	}
 
 	public static void main(String[] args) {
