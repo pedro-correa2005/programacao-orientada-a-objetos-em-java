@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -127,8 +129,11 @@ public class frmCliente extends JFrame implements ActionListener {
 				out.print(" | ");
 				out.print(status[cbxStatus.getSelectedIndex()]);
 				out.close();
-			}catch(Exception exe) {
 				
+				JOptionPane.showMessageDialog(null, "Inclusão Realizada com Sucesso!", "Inclusão no Arquivo Texto", JOptionPane.INFORMATION_MESSAGE);
+				setLimpar();
+			}catch(IOException exe) {
+				JOptionPane.showMessageDialog(null, "Erro na manipuação do Arquivo Texto." + exe, "Erro no Arquivo Texto", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if(e.getSource() == btConsultar) {
@@ -140,6 +145,11 @@ public class frmCliente extends JFrame implements ActionListener {
 		if(e.getSource() == btSair) {
 			
 		}
+	}
+
+	private void setLimpar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public static void main(String[] args) {
