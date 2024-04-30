@@ -29,7 +29,7 @@ public class frmCliente extends JFrame implements ActionListener {
 	JFormattedTextField txtCNPJ, txtTelefone;
 	JComboBox<String> cbxStatus;
 	MaskFormatter mascaraCNPJ, mascaraTelefone;
-	String status[] = {"Ativo", "Incativo"};
+	String status[] = {"Ativo", "Inativo"};
 	JButton btCadastrar, btLimpar, btSair, btConsultar;
 	JPanel pnCampos, pnBotoes;
 	BorderLayout layout;
@@ -137,19 +137,22 @@ public class frmCliente extends JFrame implements ActionListener {
 			}
 		}
 		if(e.getSource() == btConsultar) {
-			
+			//TODO
 		}
 		if(e.getSource() == btLimpar) {
-			
+			setLimpar();
 		}
 		if(e.getSource() == btSair) {
-			
+			System.exit(0);
 		}
 	}
 
 	private void setLimpar() {
-		// TODO Auto-generated method stub
-		
+		txtNome.setText("");
+		txtCNPJ.setText("");
+		txtTelefone.setText("");
+		cbxStatus.setSelectedIndex(0);
+		txtNome.requestFocus();
 	}
 
 	public static void main(String[] args) {
