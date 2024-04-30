@@ -83,7 +83,26 @@ public class frmCliente extends JFrame implements ActionListener {
 		btConsultar.addActionListener(this);
 		
 		pnCampos.setLayout(gridCampos);
+		pnBotoes.setLayout(gridBotoes);
 		
+		//Passo 3 adicionar os campos à Frame
+		pnCampos.add(lbNome);
+		pnCampos.add(txtNome);
+		pnCampos.add(lbCNPJ);
+		pnCampos.add(txtCNPJ);
+		pnCampos.add(lbTelefone);
+		pnCampos.add(txtTelefone);
+		pnCampos.add(lbStatus);
+		pnCampos.add(cbxStatus);
+		add(pnCampos, BorderLayout.NORTH);
+		
+		pnBotoes.add(btCadastrar);
+		pnBotoes.add(btLimpar);
+		pnBotoes.add(btConsultar);
+		pnBotoes.add(btSair);
+		add(pnBotoes, BorderLayout.SOUTH);
+		
+		setResizable(false);
 		setVisible(true);
 	}
 	
