@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -116,6 +118,15 @@ public class frmCliente extends JFrame implements ActionListener {
 				if(!arquivo.exists()) {
 					OutputStream f0 = new FileOutputStream("Clientes.txt");
 				}
+				PrintWriter out = new PrintWriter(new FileWriter(arquivo, true));
+				out.print(txtNome.getText());
+				out.print(" | ");
+				out.print(txtCNPJ.getText());
+				out.print(" | ");
+				out.print(txtTelefone.getText());
+				out.print(" | ");
+				out.print(status[cbxStatus.getSelectedIndex()]);
+				out.close();
 			}catch(Exception exe) {
 				
 			}
