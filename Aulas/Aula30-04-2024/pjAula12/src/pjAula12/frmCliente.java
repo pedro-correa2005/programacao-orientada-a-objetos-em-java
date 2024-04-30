@@ -64,6 +64,25 @@ public class frmCliente extends JFrame implements ActionListener {
 		
 		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setMnemonic('C');
+		btCadastrar.setToolTipText("Cadastra um cliente");
+		btCadastrar.addActionListener(this);
+		
+		btLimpar = new JButton("Limpar");
+		btLimpar.setMnemonic('L');
+		btLimpar.setToolTipText("Limpa os campos");
+		btLimpar.addActionListener(this);
+		
+		btSair = new JButton("Sair");
+		btSair.setMnemonic('S');
+		btSair.setToolTipText("Sai da tela");
+		btSair.addActionListener(this);
+		
+		btConsultar = new JButton("Consultar");
+		btConsultar.setMnemonic('T');
+		btConsultar.setToolTipText("Consulta cadastro");
+		btConsultar.addActionListener(this);
+		
+		pnCampos.setLayout(gridCampos);
 		
 		setVisible(true);
 	}
