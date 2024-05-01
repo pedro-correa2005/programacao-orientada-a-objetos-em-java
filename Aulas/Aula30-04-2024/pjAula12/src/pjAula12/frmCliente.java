@@ -128,6 +128,7 @@ public class frmCliente extends JFrame implements ActionListener {
 				out.print(txtTelefone.getText());
 				out.print(" | ");
 				out.print(status[cbxStatus.getSelectedIndex()]);
+				out.print("\n");
 				out.close();
 				
 				JOptionPane.showMessageDialog(null, "Inclusão Realizada com Sucesso!", "Inclusão no Arquivo Texto", JOptionPane.INFORMATION_MESSAGE);
