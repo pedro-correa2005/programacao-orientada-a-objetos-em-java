@@ -138,6 +138,8 @@ public class frmCliente extends JFrame implements ActionListener {
 		}
 		if(e.getSource() == btConsultar) {
 			//TODO
+			frmConsulta consulta = new frmConsulta(arquivo);
+			consulta.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
 		if(e.getSource() == btLimpar) {
 			setLimpar();
