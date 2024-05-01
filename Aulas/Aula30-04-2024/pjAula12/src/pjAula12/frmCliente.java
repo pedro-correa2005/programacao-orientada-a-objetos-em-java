@@ -58,7 +58,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		
 		try {
 			mascaraCNPJ = new MaskFormatter("##.###.###/####-##");
-			mascaraTelefone = new MaskFormatter("(##)####-#####");
+			mascaraTelefone = new MaskFormatter("(##)####-####");
 		} catch (ParseException e) {
 			System.err.println("Falha na Máscara.");
 		}
