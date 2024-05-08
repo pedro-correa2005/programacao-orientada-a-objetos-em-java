@@ -21,7 +21,7 @@ public class frmConsulta extends JFrame implements ActionListener {
 	public frmConsulta(File arqPesquisa){
 		setTitle ("Consulta de Clientes");
 		setLayout(new BorderLayout());
-		setSize(400,300);
+		setSize(500,300);
 		setLocation(50,50);
 		
 		txtConsulta = new JTextArea(15,35);
