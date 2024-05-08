@@ -3,13 +3,15 @@ package br.unisal.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import br.unisal.modelalgem.Cliente;
+
 public class TestaConexao {
 	public static void main(String[] args) {
 		try {
 			Connection con = ConnectionFactory.getConnection();
 			if(con != null) {
-				System.out.println("Conexão Realizada");
-				/*
+				System.out.println("Conexão Realizada");/*
+				
 				Cliente cliente = new Cliente();
 				cliente.setCpf(123456789);
 				cliente.setNome("Paulo C. Barreto");

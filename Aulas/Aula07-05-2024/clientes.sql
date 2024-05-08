@@ -23,3 +23,5 @@ CREATE TABLE `clientes` (
 SHOW TABLES;
 
 SELECT * FROM clientes;
+
+UPDATE clientes  SET nome = "Paulo Barreto" where cpf="123456789";
