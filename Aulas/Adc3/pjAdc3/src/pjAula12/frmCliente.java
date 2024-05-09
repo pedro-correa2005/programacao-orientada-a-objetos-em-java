@@ -29,13 +29,14 @@ import javax.swing.text.MaskFormatter;
 
 public class frmCliente extends JFrame implements ActionListener {
 	//Passo 1 - Declaração dos Objetos
-	JLabel lbNome, lbPessoa, lbCNPJ, lbCPF, lbEmail, lbTelefone, lbData, lbFaturamento, lbStatus;
+	JLabel lbNome, lbPessoa, lbCNPJ, lbCPF, lbEmail, lbTelefone, lbData, lbFaturamento, lbEstado, lbStatus;
 	JTextField txtNome, txtEmail;
 	JFormattedTextField txtCNPJ, txtTelefone, txtCPF, txtData, txtFaturamento;
-	JComboBox<String> cbxStatus, cbxPessoa;
+	JComboBox<String> cbxStatus, cbxPessoa, cbxEstado;
 	MaskFormatter mascaraCNPJ, mascaraTelefone, mascaraCPF, mascaraData;
 	String status[] = {"Ativo", "Inativo"};
 	String pessoa[] = {"Física", "Jurídica"};
+	String estados[] = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA","MT", "MS", "MG", "PB", "PR", "PA", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SP", "SC", "SE", "TO"};
 	JButton btCadastrar, btLimpar, btSair, btConsultar;
 	JPanel pnCampos, pnBotoes;
 	BorderLayout layout;
@@ -45,17 +46,17 @@ public class frmCliente extends JFrame implements ActionListener {
 	public frmCliente() {
 		setTitle("Cadastro de Clientes");
 		setLayout(layout = new BorderLayout());
-		setSize(400, 300);
+		setSize(400, 325);
 		setLocation(500, 200);//Posição em que exibe
 		
 		
 		//Passo 2: Instanciação dos Objetos
 		pnCampos = new JPanel();
 		pnBotoes = new JPanel();
-		gridCampos = new GridLayout(9,2);
+		gridCampos = new GridLayout(10,2);
 		gridBotoes = new GridLayout(1,4);
 		
-		lbNome = new JLabel("Razão Social ");
+		lbNome = new JLabel("Razão Social / Nome ");
 		lbPessoa = new JLabel("Pessoa ");
 		lbCPF = new JLabel("CPF ");
 		lbCNPJ = new JLabel("CNPJ ");
@@ -64,15 +65,17 @@ public class frmCliente extends JFrame implements ActionListener {
 		lbTelefone = new JLabel("Telefone ");
 		lbData = new JLabel("Data de Cadastro ");
 		lbFaturamento = new JLabel("Faturamento ");
+		lbEstado = new JLabel("Estado ");
 		lbStatus = new JLabel("Status ");
 		
 		txtNome = new JTextField(20);
 		txtEmail = new JTextField(20);
+		txtEmail.setText("@");
 		
 		try {
 			mascaraCNPJ = new MaskFormatter("##.###.###/####-##");
 			mascaraTelefone = new MaskFormatter("(##)####-####");
-			mascaraCPF = new MaskFormatter("###.###.###/##");
+			mascaraCPF = new MaskFormatter("###.###.###-##");
 			mascaraData = new MaskFormatter("##/##/####");
 		} catch (ParseException e) {
 			System.err.println("Falha na Máscara.");
@@ -91,6 +94,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		cbxStatus = new JComboBox<String>(status);
 		cbxPessoa = new JComboBox<String>(pessoa);
 		cbxPessoa.addActionListener(this);
+		cbxEstado = new JComboBox<String>(estados);
 		
 		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setMnemonic('C');
@@ -132,6 +136,8 @@ public class frmCliente extends JFrame implements ActionListener {
 		pnCampos.add(txtData);
 		pnCampos.add(lbFaturamento);
 		pnCampos.add(txtFaturamento);
+		pnCampos.add(lbEstado);
+		pnCampos.add(cbxEstado);
 		pnCampos.add(lbStatus);
 		pnCampos.add(cbxStatus);
 		add(pnCampos, BorderLayout.NORTH);
@@ -152,7 +158,6 @@ public class frmCliente extends JFrame implements ActionListener {
 			cadastrar();
 		}
 		if(e.getSource() == btConsultar) {
-			//TODO
 			frmConsulta consulta = new frmConsulta(arquivo);
 			consulta.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
@@ -172,11 +177,13 @@ public class frmCliente extends JFrame implements ActionListener {
 				lbCPF.setEnabled(false);
 				txtCPF.setEnabled(false);
 				txtCPF.setText("");
+				txtCNPJ.setText("");
 			}else {
 				//Senão troca o campo de texto que aparece de CNPJ para CPF
 				lbCNPJ.setEnabled(false);
 				txtCNPJ.setEnabled(false);
 				txtCNPJ.setText("");
+				txtCPF.setText("");
 				lbCPF.setEnabled(true);
 				txtCPF.setEnabled(true);
 			}
@@ -209,6 +216,8 @@ public class frmCliente extends JFrame implements ActionListener {
 			out.print(" | ");
 			out.print(txtFaturamento.getText());
 			out.print(" | ");
+			out.print(estados[cbxEstado.getSelectedIndex()]);
+			out.print(" | ");
 			out.println(status[cbxStatus.getSelectedIndex()]);
 			out.close();
 			
@@ -227,7 +236,7 @@ public class frmCliente extends JFrame implements ActionListener {
 			return false;
 		}
 		//Se o usuario não inserir nem o cnpj nem o cpf mostra mensagem que pede para preencher.
-		if(txtCNPJ.getText().equals("  .   .   /    -  ") && txtCPF.getText().equals("   .   .   /  ")) {
+		if(txtCNPJ.getText().equals("  .   .   /    -  ") && txtCPF.getText().equals("   .   .   -  ")) {
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos.", "Validação", JOptionPane.ERROR_MESSAGE);
 			return false;	
 		}
@@ -239,6 +248,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		 * Permite sublinhado "_" e ponto "."
 		 * Ponto "." não é permitido no início nem no fim da string
 		 * Não é permitidos pontos "." consecutivos
+		 * Deve haver um domínio
 		 * Máximo de 64 caracteres
 		 */
 		Pattern restricao = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
@@ -247,6 +257,15 @@ public class frmCliente extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Insira um Email válido", "Validação", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
+		//Validação da data:
+		try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            formato.setLenient(false);
+            formato.parse(txtData.getText());
+        } catch (ParseException e) {
+        	JOptionPane.showMessageDialog(null, "Insira uma Data válida", "Validação", JOptionPane.ERROR_MESSAGE);
+			return false;
+        }
 		/*	Validação de faturamento:
 		 * Consiste de uma expressão regular que impões as seguintes restrições:
 		 * Primeiro caractere deve ser um R
@@ -255,7 +274,6 @@ public class frmCliente extends JFrame implements ActionListener {
 		 * A string deve conter uma vírgula (,) seguida por caracteres numéricos
 		 * Último caractere deve ser um número
 		 */
-		System.out.print(txtFaturamento.getText());
 		restricao = Pattern.compile("^(R\\$)(\\s|\\xA0)(\\d*)(,)(\\d{2})$");
 		Matcher faturamento = restricao.matcher(txtFaturamento.getText());
 		if(!(faturamento.find())) {
@@ -270,11 +288,12 @@ public class frmCliente extends JFrame implements ActionListener {
 		cbxPessoa.setSelectedIndex(0);
 		txtCNPJ.setText("");
 		txtCPF.setText("");
-		txtEmail.setText("");
+		txtEmail.setText("@");
 		txtTelefone.setText("");
 		String data = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
 		txtData.setText(data);
 		txtFaturamento.setText((NumberFormat.getCurrencyInstance().format(.00)));
+		cbxEstado.setSelectedIndex(0);
 		cbxStatus.setSelectedIndex(0);
 		txtNome.requestFocus();
 	}
