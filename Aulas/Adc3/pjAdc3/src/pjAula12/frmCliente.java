@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
@@ -206,6 +207,8 @@ public class frmCliente extends JFrame implements ActionListener {
 			out.print(" | ");
 			out.print(txtData.getText());
 			out.print(" | ");
+			out.print(txtFaturamento.getText());
+			out.print(" | ");
 			out.println(status[cbxStatus.getSelectedIndex()]);
 			out.close();
 			
@@ -238,13 +241,27 @@ public class frmCliente extends JFrame implements ActionListener {
 		 * Não é permitidos pontos "." consecutivos
 		 * Máximo de 64 caracteres
 		 */
-		String email = txtEmail.getText();
-		String restricao = new String("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
-		if(!(Pattern.compile(restricao).matcher(email).matches())) {
+		Pattern restricao = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+		Matcher email = restricao.matcher(txtEmail.getText());
+		if(!(email.find())) {
 			JOptionPane.showMessageDialog(null, "Insira um Email válido", "Validação", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		
+		/*	Validação de faturamento:
+		 * Consiste de uma expressão regular que impões as seguintes restrições:
+		 * Primeiro caractere deve ser um R
+		 * Segundo caractere deve ser um $
+		 * Terceiro caractere deve ser um espaço em branco ou caractere 160(ascii) que está presente na máscara NumberFormat
+		 * A string deve conter uma vírgula (,) seguida por caracteres numéricos
+		 * Último caractere deve ser um número
+		 */
+		System.out.print(txtFaturamento.getText());
+		restricao = Pattern.compile("^(R\\$)(\\s|\\xA0)(\\d*)(,)(\\d{2})$");
+		Matcher faturamento = restricao.matcher(txtFaturamento.getText());
+		if(!(faturamento.find())) {
+			JOptionPane.showMessageDialog(null, "Insira um Faturamento válido\nPadrão: R$ 0,00", "Validação", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		return true;
 	}
 	
@@ -257,6 +274,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		txtTelefone.setText("");
 		String data = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
 		txtData.setText(data);
+		txtFaturamento.setText((NumberFormat.getCurrencyInstance().format(.00)));
 		cbxStatus.setSelectedIndex(0);
 		txtNome.requestFocus();
 	}
