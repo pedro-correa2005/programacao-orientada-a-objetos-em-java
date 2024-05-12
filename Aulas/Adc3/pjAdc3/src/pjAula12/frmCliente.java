@@ -70,7 +70,6 @@ public class frmCliente extends JFrame implements ActionListener {
 		
 		txtNome = new JTextField(20);
 		txtEmail = new JTextField(20);
-		txtEmail.setText("@");
 		
 		try {
 			mascaraCNPJ = new MaskFormatter("##.###.###/####-##");
@@ -203,8 +202,12 @@ public class frmCliente extends JFrame implements ActionListener {
 			out.print(txtNome.getText());
 			out.print(" | ");
 			if(cbxPessoa.getSelectedIndex() == 0) {
+				out.print("Pessoa Física");
+				out.print(" | ");
 				out.print(txtCPF.getText());
 			}else {				
+				out.print("Pessoa Jurídica");
+				out.print(" | ");
 				out.print(txtCNPJ.getText());
 			}
 			out.print(" | ");
@@ -254,7 +257,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		Pattern restricao = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
 		Matcher email = restricao.matcher(txtEmail.getText());
 		if(!(email.find())) {
-			JOptionPane.showMessageDialog(null, "Insira um Email válido", "Validação", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Insira um Email válido. Padrão: usuario@domínio", "Validação", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		//Validação da data:
@@ -288,7 +291,7 @@ public class frmCliente extends JFrame implements ActionListener {
 		cbxPessoa.setSelectedIndex(0);
 		txtCNPJ.setText("");
 		txtCPF.setText("");
-		txtEmail.setText("@");
+		txtEmail.setText("");
 		txtTelefone.setText("");
 		String data = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
 		txtData.setText(data);
