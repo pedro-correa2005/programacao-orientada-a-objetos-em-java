@@ -1,4 +1,4 @@
-package pjAula15;
+package pjAula14;
 
 public class PedidoCompra {
 	private int id;
